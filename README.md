@@ -1,4 +1,4 @@
-# hiju
+# Hiju
 Admin Dashboard Template
 Dibuat menggunakan bootsrap 5
 
