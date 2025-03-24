@@ -27,3 +27,10 @@ Okta Pilopa
 
 7. Gambar 7
 ![Alt Text](images/7.png)
+
+# Penutup
+Support saya untuk terus berbagi, dengan mendoakan saya dan keluarga selalu dalam keadaan sehat, diampuni dosa, dimurahkan rejeki, selamat dari siksa kubur, dimudahkan segala urusan, dijamin masuk surga. Amiiin
+
+Jika ingin berbagi sedikit rejeki berikut saya lampirkan akun dana saya 0816564142
+
+Terimakasih !
