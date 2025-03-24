@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Design</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .bg-light-green {
+        background-color: #e8f5e9;
+      }
+
+      .bg-medium-green {
+        background-color: #8bc34a;
+      }
+
+      .bg-dark-green {
+        background-color: #2e7d32;
+      }
+
+      .text-dark-green {
+        color: #2e7d32;
+      }
+
+      .logo-bar {
+        width: 20px;
+        height: 10px;
+        display: inline-block;
+        margin-right: 2px;
+      }
+
+      .logo-bar-1 {
+        background-color: #8bc34a;
+      }
+
+      .logo-bar-2 {
+        background-color: #1b5e20;
+      }
+
+      .logo-bar-3 {
+        background-color: #aed581;
+      }
+
+      .logo-bar-4 {
+        background-color: #000;
+      }
+
+      .hero-section {
+        position: relative;
+        min-height: 80vh;
+      }
+
+      .green-circle {
+        position: absolute;
+        background-color: #e8f5e9;
+        border-radius: 50%;
+        z-index: -1;
+      }
+
+      .circle-1 {
+        width: 600px;
+        height: 600px;
+        top: -200px;
+        right: -200px;
+      }
+
+      .circle-2 {
+        width: 100px;
+        height: 100px;
+        top: 80px;
+        right: 35%;
+      }
+
+      .circle-3 {
+        width: 400px;
+        height: 400px;
+        bottom: -200px;
+        right: 10%;
+      }
+
+      .btn-green {
+        background-color: #8bc34a;
+        color: white;
+        border: none;
+        padding: 10px 30px;
+        font-weight: bold;
+      }
+
+      .btn-green:hover {
+        background-color: #7cb342;
+        color: white;
+      }
+
+      .illustration-container img {
+        max-width: 100%;
+      }
+
+      .footer-section {
+        background: linear-gradient(
+          120deg,
+          #8bc34a 0%,
+          #82b846 50%,
+          #8bc34a 100%
+        );
+        padding: 30px 0;
+        margin-top: 50px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .footer-triangle {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 100vw solid transparent;
+        border-bottom: 100px solid #8bc34a;
+        top: -100px;
+        left: 0;
+      }
+
+      .nav-link {
+        color: #2e7d32;
+        font-weight: 500;
+        margin: 0 10px;
+      }
+
+      .nav-link:hover {
+        color: #1b5e20;
+      }
+
+      @media (max-width: 768px) {
+        .hero-text {
+          text-align: center;
+          margin-top: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section with Background Circles -->
+    <div class="hero-section">
+      <div class="green-circle circle-1"></div>
+      <div class="green-circle circle-2"></div>
+
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light py-3">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <span class="logo-bar logo-bar-1"></span>
+            <span class="logo-bar logo-bar-2"></span>
+            <span class="logo-bar logo-bar-3"></span>
+            <span class="logo-bar logo-bar-4"></span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contacts</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Shop</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <div class="container mt-4">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="illustration-container">
+              <img
+                src="416881-PDT6DN-54.png"
+                alt="People reading books"
+                class="img-fluid"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6 hero-text">
+            <p class="text-success mb-0">pilopa.my.id</p>
+            <h1 class="display-2 fw-bold text-dark-green">
+              Menerima Program Magang
+            </h1>
+            <p class="lead">
+              pilopa.my.id merupakan pengadilan tingkat banding
+              dimana memiliki tugas untuk menerima, memeriksan dan memutus
+              perkara banding dari para pencari keadilan. Selain itu salah satu
+              layanan yang diberikan adalah menerima program magang baik itu
+              dari tingkat sekolah, perguruan tinggi maupun dari kalangan
+              masyarakat umum
+            </p>
+            <button class="btn btn-green mt-3">Daftar Disini</button>
+            <button class="btn btn-green mt-3">Lihat Persyaratan Magang</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section text-white">
+      <div class="footer-triangle"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-md-0">
+            <h4>Kontak</h4>
+            <p>
+              pilopa.my.id Jalan Bina Praja Timur (Komplek
+              Perkantoran Propinsi Kalimantan Selatan) Palam, Cempaka,
+              Banjarbaru Kalimantan Selatan 70732 <br /><br />
+              Telp : 0511-3354527 Fax : 0511-3364615
+              <br />
+              E-mail Utama: pengadilan.tinggi.bjm@gmail.com
+            </p>
+          </div>
+          <div class="col-md-4 mb-md-0">
+            <h4>Link Terkait</h4>
+            <ul>
+              <li>Mahkamah Agung</li>
+              <li>Ditjen Badan Peradilan Umum</li>
+              <li>pilopa.my.id</li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h4>Alamat</h4>
+            <p>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d509748.6168363351!2d114.829188!3d-3.4918600000000004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de68695ba87d5cd%3A0xe2614a853c4c240a!2sPengadilan%20Tinggi%20Banjarmasin!5e0!3m2!1sid!2sid!4v1742628996642!5m2!1sid!2sid"
+                width="100%"
+                height="200"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

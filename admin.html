@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #8bc34a;
+            --primary-dark: #497913;
+        }
+
+        body {
+            background-color: #f8faf5;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: linear-gradient(135deg,
+                    var(--primary-color) 0%,
+                    var(--primary-dark) 100%);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-link {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            border-left: 4px solid transparent;
+            transition: 0.3s;
+        }
+
+        .sidebar-link:hover {
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.1) 0%,
+                    transparent 100%);
+            border-left-color: white;
+            color: white;
+        }
+
+        .sidebar-link.active {
+            background: linear-gradient(90deg,
+                    rgba(255, 255, 255, 0.15) 0%,
+                    transparent 100%);
+            border-left-color: white;
+        }
+
+        .sidebar.collapsed {
+            margin-left: -250px;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+            background: radial-gradient(circle at top right,
+                    rgba(139, 195, 74, 0.15) 0%,
+                    transparent 60%),
+                radial-gradient(circle at bottom left,
+                    rgba(139, 195, 74, 0.1) 0%,
+                    transparent 40%),
+                radial-gradient(circle at center,
+                    rgba(139, 195, 74, 0.05) 0%,
+                    transparent 70%),
+                linear-gradient(135deg,
+                    rgba(255, 255, 255, 0.9),
+                    rgba(255, 255, 255, 0.95));
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        /* Add these new styles after main-content */
+        .main-content::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background-color: rgba(139, 195, 74, 0.05);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            z-index: -1;
+        }
+
+        .main-content::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background-color: rgba(139, 195, 74, 0.05);
+            border-radius: 50%;
+            bottom: 10%;
+            right: 10%;
+            z-index: -1;
+        }
+
+        /* Add an additional circle */
+        .circle-accent {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle at center,
+                    rgba(139, 195, 74, 0.1) 70%,
+                    rgba(139, 195, 74, 0.05) 60%,
+                    transparent 100%);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            transform: none;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .circle-accent-2 {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at center,
+                    rgba(139, 195, 74, 0.08) 70%,
+                    rgba(139, 195, 74, 0.03) 60%,
+                    transparent 100%);
+            border-radius: 50%;
+            top: 250px;
+            right: 450px;
+            transform: none;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px 0 rgba(31, 38, 135, 0.1);
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 15px;
+}
+
+.card-header {
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+/* Add these new styles for table and list items */
+.table {
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.list-group-item {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.list-group-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+        .main-content.expanded {
+            margin-left: 0;
+        }
+
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .container-fluid {
+            flex: 1 0 auto;
+        }
+
+        .footer {
+            flex-shrink: 0;
+            background: linear-gradient(135deg,
+                    rgba(139, 195, 74, 0.1),
+                    rgba(139, 195, 74, 0.05));
+            padding: 1rem 0;
+            /* Remove left/right padding */
+            text-align: center;
+            border-top: 1px solid rgba(139, 195, 74, 0.2);
+            margin: 0;
+            /* Remove all margins */
+            width: 100%;
+            /* Ensure full width */
+        }
+
+        /* Update container inside footer */
+        .footer .container-fluid {
+            padding: 0 30px;
+            /* Add padding to container instead */
+        }
+
+        .footer-links {
+            text-align: right;
+            /* Align links to the right */
+        }
+
+        .footer-links a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Update the media query in your style section */
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-left: -250px;
+                z-index: 1000;
+                transition: all 0.3s ease;
+            }
+
+            .sidebar.show {
+                margin-left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .footer {
+                margin: 0;
+                width: 100%;
+            }
+
+            .footer-links {
+                text-align: center;
+                margin-top: 1rem;
+            }
+
+            .footer p {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="p-3">
+            <h4 class="text-white">Admin Panel</h4>
+        </div>
+        <div class="nav flex-column">
+            <a href="admin.html" class="sidebar-link active">
+                <i class="bi bi-house-door me-2"></i> Dashboard
+            </a>
+            <a href="users.html" class="sidebar-link">
+                <i class="bi bi-people me-2"></i> Users
+            </a>
+            <a href="projects.html" class="sidebar-link">
+                <i class="bi bi-folder me-2"></i> Projects
+            </a>
+            <a href="messages.html" class="sidebar-link">
+                <i class="bi bi-chat-dots me-2"></i> Messages
+            </a>
+            <a href="settings.html" class="sidebar-link">
+                <i class="bi bi-gear me-2"></i> Settings
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="circle-accent"></div>
+        <div class="circle-accent-2"></div>
+        <!-- Top Navbar -->
+        <nav class="navbar navbar-expand-lg mb-4">
+            <div class="container-fluid">
+                <button class="btn" id="sidebar-toggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="ms-auto">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <div class="container-fluid">
+            <!-- Stats Cards -->
+            <div class="row mb-4">
+                <div class="col-md-3 mb-3">
+                    <div class="card stat-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Users</h5>
+                            <h2>1,234</h2>
+                            <p class="text-success mb-0">
+                                <i class="bi bi-arrow-up"></i> 12% increase
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card stat-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Projects</h5>
+                            <h2>42</h2>
+                            <p class="text-danger mb-0">
+                                <i class="bi bi-arrow-down"></i> 3% decrease
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card stat-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Revenue</h5>
+                            <h2>$15,234</h2>
+                            <p class="text-success mb-0">
+                                <i class="bi bi-arrow-up"></i> 8% increase
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card stat-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tasks</h5>
+                            <h2>18</h2>
+                            <p class="text-muted mb-0">Active tasks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="row">
+                <div class="col-md-8 mb-4">
+                    <div class="card">
+                        <div class="card-header">Recent Activity</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Activity</th>
+                                            <th>Time</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>John Doe</td>
+                                            <td>Created new project</td>
+                                            <td>2 hours ago</td>
+                                            <td><span class="badge bg-success">Completed</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jane Smith</td>
+                                            <td>Updated document</td>
+                                            <td>3 hours ago</td>
+                                            <td><span class="badge bg-warning">Pending</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mike Johnson</td>
+                                            <td>Deleted file</td>
+                                            <td>5 hours ago</td>
+                                            <td><span class="badge bg-danger">Failed</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">Notifications</div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">New user registered</h6>
+                                        <small>3 mins ago</small>
+                                    </div>
+                                    <p class="mb-1">John Doe created an account.</p>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">Server update</h6>
+                                        <small>1 hour ago</small>
+                                    </div>
+                                    <p class="mb-1">Server maintenance completed.</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-start">
+                        <p class="mb-0">
+                            &copy; 2024 pilopa.my.id. All rights reserved.
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.querySelector(".sidebar");
+            const mainContent = document.querySelector(".main-content");
+            const sidebarToggle = document.getElementById("sidebar-toggle");
+
+            sidebarToggle.addEventListener("click", function () {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.toggle("show");
+                } else {
+                    sidebar.classList.toggle("collapsed");
+                    mainContent.classList.toggle("expanded");
+                }
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener("click", function (event) {
+                if (window.innerWidth <= 768) {
+                    const isClickInsideSidebar = sidebar.contains(event.target);
+                    const isClickInsideToggle = sidebarToggle.contains(event.target);
+
+                    if (
+                        !isClickInsideSidebar &&
+                        !isClickInsideToggle &&
+                        sidebar.classList.contains("show")
+                    ) {
+                        sidebar.classList.remove("show");
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
